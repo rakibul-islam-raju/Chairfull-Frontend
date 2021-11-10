@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import RegisterPage from "./pages/ReigsterPage/RegisterPage";
+import ShopPage from "./pages/ShopPage/ShopPage";
 import Footer from "./shared/Footer/Footer";
 import Header from "./shared/Header/Header";
 
@@ -11,6 +14,13 @@ function App() {
 				<Header />
 				<Switch>
 					<Route exact path="/" component={HomePage} />
+					<Route exact path="/shop" component={ShopPage} />
+					<Route exact path="/login" component={LoginPage} />
+					<Route
+						exact
+						path="/registration"
+						component={RegisterPage}
+					/>
 				</Switch>
 				<Footer />
 			</Router>

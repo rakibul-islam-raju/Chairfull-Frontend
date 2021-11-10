@@ -19,5 +19,5 @@ module.exports = {
 			translate: ["hover", "group-hover"],
 		},
 	},
-	plugins: [],
+	plugins: [require("@tailwindcss/forms")],
 };

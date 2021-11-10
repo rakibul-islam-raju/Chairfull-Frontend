@@ -8,8 +8,8 @@ const Header = () => {
 			<div className="wrapper flex flex-wrap justify-between items-center">
 				<div className="w-6/12 md:w-4/12">
 					<Link to="/">
-						<h2 className="text-4xl text-coolGray-600 font-semibold">
-							chair<span className="text-orange-500">G</span>
+						<h2 className="text-4xl text-coolGray-600">
+							chair<span className="text-orange-500">full</span>
 						</h2>
 					</Link>
 				</div>
@@ -17,13 +17,27 @@ const Header = () => {
 					<nav>
 						<ul className="flex flex-wrap space-x-4 justify-end">
 							<li>
-								<Link to="/">Home</Link>
+								<Link className="nav-link" to="/">
+									Home
+								</Link>
 							</li>
 							<li>
-								<Link to="/">About</Link>
+								<Link className="nav-link" to="/shop">
+									Shop
+								</Link>
 							</li>
 							<li>
-								<Link to="/">Pay</Link>
+								<Link className="nav-link" to="/">
+									Pay
+								</Link>
+							</li>
+							<li>
+								<Link
+									to="/login"
+									className="btn btn-secondary  ml-2"
+								>
+									Login
+								</Link>
 							</li>
 						</ul>
 					</nav>

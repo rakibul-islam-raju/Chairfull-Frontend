@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
 	return (
-		<footer className="bg-coolGray-500 text-white">
+		<footer className="">
 			<div className="wrapper flex py-8">
 				<div className="w-full md:w-4/12">
 					<div className="logo">
@@ -15,7 +15,7 @@ const Footer = () => {
 					</div>
 				</div>
 			</div>
-			<div className="bg-coolGray-600 py-2">
+			<div className="bg-coolGray-600 py-2 text-white">
 				<div className="wrapper">
 					Developped by Rakibul Islam © 2021 chairfull
 				</div>

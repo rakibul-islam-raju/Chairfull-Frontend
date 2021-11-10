@@ -1,3 +1,30 @@
 .wrapper {
     @apply container mx-auto px-5 md:px-0
 }
+
+.nav-link{
+    @apply text-lg hover:text-orange-500
+}
+.btn {
+    @apply px-4 py-2 transition duration-300
+}
+
+.btn-primary {
+    @apply text-xl border border-orange-500 hover:bg-orange-500 hover:text-white 
+}
+
+.btn-secondary {
+    @apply text-xl border border-orange-500 bg-orange-500 text-white 
+}
+
+/* .btn-underline {
+    @apply
+} */
+
+.form-input{
+    @apply w-full rounded border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500
+}
+
+.section-title{
+    @apply text-4xl text-center mb-12
+}
