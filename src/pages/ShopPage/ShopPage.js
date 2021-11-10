@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Breadcrumb from "../../shared/Breadcrumb/Breadcrumb";
 import Loading from "../../shared/Loading/Loading";
 import SingleProduct from "../../shared/SingleProduct/SingleProduct";
 
@@ -24,19 +25,7 @@ const ShopPage = () => {
 	}, []);
 	return (
 		<>
-			<div className="bg-coolGray-100 py-6">
-				<div className="wrapper">
-					<h4 className="page-title text-4xl pl-2 border-l-4 border-orange-500">
-						The Shop
-					</h4>
-					<h6 className="pl-4 mt-2">
-						<Link className="hover:text-orange-500" to="/">
-							Home
-						</Link>{" "}
-						&gt; Shop
-					</h6>
-				</div>
-			</div>
+			<Breadcrumb pageTitle="The Shop" pagePath="Shop" />
 			<section className="wrapper mt-12">
 				{loading ? (
 					<Loading />
