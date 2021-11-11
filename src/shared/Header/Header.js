@@ -52,7 +52,7 @@ const Header = () => {
 									</li>
 									<li>
 										<Link
-											to="/"
+											to="/dashboard"
 											className="nav-link text-orange-500 font-semibold border-b-2 border-orange-500"
 										>
 											Dashboard

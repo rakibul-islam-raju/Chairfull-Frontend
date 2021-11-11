@@ -34,15 +34,15 @@ export function AuthProvider({ children }) {
 	}, []);
 
 	// check if user is admin or not
-	// useEffect(() => {
-	// 	setLoading(true);
-	// 	axios.get(`${baseUrl}/users/${currentUser?.email}`).then((res) => {
-	// 		if (res.data.admin === true) {
-	// 			setIsAdmin(true);
-	// 		}
-	// 		setLoading(false);
-	// 	});
-	// }, [currentUser?.email]);
+	useEffect(() => {
+		setLoading(true);
+		axios.get(`${baseUrl}/users/${currentUser?.email}`).then((res) => {
+			if (res.data.admin === true) {
+				setIsAdmin(true);
+			}
+			setLoading(false);
+		});
+	}, [currentUser?.email]);
 
 	// signup
 	async function signup(email, password, fullName) {
@@ -75,13 +75,12 @@ export function AuthProvider({ children }) {
 
 	// save user to database
 	function saveUser(email, displayName, method) {
-		console.log("save user to db");
 		const newUser = { email, displayName };
-		// axios({
-		// 	method: method,
-		// 	url: `${baseUrl}/users`,
-		// 	data: newUser,
-		// });
+		axios({
+			method: method,
+			url: `${baseUrl}/users`,
+			data: newUser,
+		});
 	}
 
 	const value = { currentUser, signup, login, logout, isAdmin };
