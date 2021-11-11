@@ -9,6 +9,12 @@ module.exports = {
 				orange: colors.orange,
 				coolGray: colors.coolGray,
 			},
+			fontFamily: {
+				lora: "'Lora', serif",
+				dm: "'DM Mono', monospace",
+				poppins: "'Poppins', sans-serif",
+				dancing: "'Dancing Script', cursive",
+			},
 		},
 	},
 	variants: {

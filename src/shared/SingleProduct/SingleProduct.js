@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const SingleProduct = ({ product }) => {
 	return (
 		<div className="group pb-4">
@@ -13,7 +15,7 @@ const SingleProduct = ({ product }) => {
 				<h6 className="text-lg">$ 26.00</h6>
 				<div className="overflow-hidden">
 					<button className="border-b-2 border-orange-500 transform translate-y-6 group-hover:translate-y-0 transition duration-200">
-						Buy Now
+						<Link to={`order/${1}`}>Order Now</Link>
 					</button>
 				</div>
 			</div>
