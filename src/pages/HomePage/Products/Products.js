@@ -20,7 +20,7 @@ const Products = () => {
 			})
 			.catch((err) => {
 				setLoading(false);
-				setError("Something went wrong. Please Try agail later.");
+				setError("Something went wrong. Please Try again later.");
 			});
 	}, []);
 

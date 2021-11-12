@@ -39,6 +39,8 @@ export function AuthProvider({ children }) {
 		axios.get(`${baseUrl}/users/${currentUser?.email}`).then((res) => {
 			if (res.data.admin === true) {
 				setIsAdmin(true);
+			} else {
+				setIsAdmin(false);
 			}
 			setLoading(false);
 		});

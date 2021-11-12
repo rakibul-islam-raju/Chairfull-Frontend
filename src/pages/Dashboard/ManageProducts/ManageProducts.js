@@ -4,6 +4,7 @@ import AdminBreadcrumb from "../AdminBreadcrumb";
 import { baseUrl } from "../../../Utilities/Utils";
 import Loading from "../../../shared/Loading/Loading";
 import ErrorMessage from "../../../Utilities/Messages/ErrorMessage";
+import Swal from "sweetalert2";
 
 const ManageProducts = () => {
 	const [products, setProducts] = useState([]);
@@ -25,28 +26,43 @@ const ManageProducts = () => {
 	}, []);
 
 	const deleteHandler = (id) => {
-		const proceed = window.confirm(
-			"Are you sure, you want to delete the product?"
-		);
-		if (proceed) {
-			setLoading(true);
-			axios
-				.delete(`${baseUrl}/products/${id}`)
-				.then((res) => {
-					if (res.data.deletedCount > 0) {
-						alert("Deleted successfully");
-						const remainingProducts = products.filter(
-							(product) => product._id !== id
+		setError("");
+
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#EF4444",
+			cancelButtonColor: "#6B7280",
+			confirmButtonText: "Yes, delete it!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				setLoading(true);
+				axios
+					.delete(`${baseUrl}/products/${id}`)
+					.then((res) => {
+						if (res.data.deletedCount > 0) {
+							Swal.fire({
+								title: "Product deleted successfully",
+								icon: "success",
+								confirmButtonText: "OK",
+							});
+							const remainingProducts = products.filter(
+								(product) => product._id !== id
+							);
+							setProducts(remainingProducts);
+						}
+						setLoading(false);
+					})
+					.catch((err) => {
+						setError(
+							"Something went wrong! Please try again later."
 						);
-						setProducts(remainingProducts);
-					}
-					setLoading(false);
-				})
-				.catch((err) => {
-					setError("Something went wrong! Please try again later.");
-					setLoading(false);
-				});
-		}
+						setLoading(false);
+					});
+			}
+		});
 	};
 
 	const resetError = () => {
@@ -65,66 +81,64 @@ const ManageProducts = () => {
 					{loading ? (
 						<Loading />
 					) : (
-						<div class="overflow-x-auto w-full">
-							<table class="mx-auto w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
-								<thead class="bg-coolGray-600">
-									<tr class="text-white text-left">
-										<th class="font-semibold text-sm uppercase px-6 py-4">
-											{" "}
-											Product{" "}
-										</th>
-										<th class="font-semibold text-sm uppercase px-6 py-4 text-center">
-											{" "}
-											Price{" "}
-										</th>
-										<th class="font-semibold text-sm uppercase px-6 py-4">
-											{" "}
-										</th>
-									</tr>
-								</thead>
-								<tbody class="divide-y divide-gray-200">
-									{products.map((product) => (
-										<tr>
-											<td class="px-6 py-4">
-												<div class="flex items-center space-x-3">
-													<div class="inline-flex w-28 h-28">
-														{" "}
-														<img
-															class="w-28 h-28 object-cover rounded"
-															alt="User avatar"
-															src={product.image}
-														/>{" "}
-													</div>
-													<div>
-														<h4 className="text-xl">
-															{" "}
-															{product.name}{" "}
-														</h4>
-													</div>
-												</div>
-											</td>
-											<td class="px-6 py-4 text-center">
-												{" "}
-												$ {product.price}{" "}
-											</td>
-											<td class="px-6 py-4 text-center">
-												{" "}
-												<button
-													onClick={() =>
-														deleteHandler(
-															product._id
-														)
-													}
-													class="text-red-500 bg-red-100 hover:bg-red-200 transition px-2 py-1 rounded"
-												>
-													Delete
-												</button>{" "}
-											</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
+						<section className="font-mono">
+							<div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+								<div className="w-full overflow-x-auto">
+									<table className="w-full">
+										<thead>
+											<tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+												<th className="px-4 py-3">
+													Product
+												</th>
+												<th className="px-4 py-3">
+													Price
+												</th>
+												<th className="px-4 py-3">
+													Actions
+												</th>
+											</tr>
+										</thead>
+										<tbody className="bg-white">
+											{products.map((product) => (
+												<tr className="text-gray-700">
+													<td className="px-4 py-3 border">
+														<div className="flex items-center font-semibold text-sm">
+															<div className="">
+																<img
+																	className="w-24 h-24 rounded-full"
+																	src={
+																		product.image
+																	}
+																	alt=""
+																/>
+															</div>
+															<p className="text-semibold ml-2">
+																{product.name}
+															</p>
+														</div>
+													</td>
+													<td className="px-4 py-3 text-ms font-semibold border">
+														$ {product.price}
+													</td>
+													<td className="px-4 py-3 text-sm font-semibold border">
+														<button
+															onClick={() =>
+																deleteHandler(
+																	product._id
+																)
+															}
+															className="bg-red-100 text-red-700 px-2 py-1 font-semibold leading-tight rounded-sm text-sm"
+														>
+															Delete
+														</button>
+													</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
 					)}
 				</div>
 			</div>

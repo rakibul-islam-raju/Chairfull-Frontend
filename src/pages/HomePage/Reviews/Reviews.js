@@ -4,6 +4,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Loading from "../../../shared/Loading/Loading";
 import Rating from "react-rating";
+import { baseUrl } from "../../../Utilities/Utils";
+import ErrorMessage from "../../../Utilities/Messages/ErrorMessage";
 
 const Reviews = () => {
 	const [reviews, setReviews] = useState([]);
@@ -11,8 +13,9 @@ const Reviews = () => {
 	const [error, setError] = useState("");
 
 	useEffect(() => {
+		setLoading(true);
 		axios
-			.get("/data/reviews.json")
+			.get(`${baseUrl}/reviews`)
 			.then((res) => {
 				setReviews(res.data);
 				setLoading(false);
@@ -22,6 +25,10 @@ const Reviews = () => {
 				setLoading(false);
 			});
 	}, []);
+
+	const resetError = () => {
+		setError("");
+	};
 
 	const fillRatingMarkup = (
 		<FontAwesomeIcon className="text-yellow-500" icon={faStar} />
@@ -33,6 +40,7 @@ const Reviews = () => {
 	return (
 		<section className="wrapper mt-32">
 			<h4 className="section-title">Testimonials</h4>
+			{error && <ErrorMessage text={error} resetError={resetError} />}
 			{loading ? (
 				<Loading />
 			) : (
@@ -44,7 +52,7 @@ const Reviews = () => {
 								icon={faQuoteRight}
 								size="lg"
 							/>
-							<p className="text-lg">{review.summary}</p>
+							<p className="text-lg">{review.review}</p>
 							<Rating
 								className="my-2"
 								initialRating={review.star}

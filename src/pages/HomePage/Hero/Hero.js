@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import HeroImage from "../../../assets/images/hero2.jpg";
 const Hero = () => {
 	return (
@@ -10,7 +11,9 @@ const Hero = () => {
 					</span>{" "}
 					and hold a king
 				</h2>
-				<button className="mt-8 btn btn-primary">Shop Now</button>
+				<Link to="/shop">
+					<button className="mt-8 btn btn-primary">Shop Now</button>
+				</Link>
 			</div>
 			<div className="w-full md:w-8/12">
 				<img

@@ -46,7 +46,10 @@ const Header = () => {
 							) : (
 								<>
 									<li>
-										<Link className="nav-link" to="/pay">
+										<Link
+											className="nav-link"
+											to="/dashboard"
+										>
 											My Orders
 										</Link>
 									</li>

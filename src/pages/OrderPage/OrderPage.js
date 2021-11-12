@@ -18,7 +18,7 @@ const OrderPage = () => {
 		fullName: currentUser?.displayName,
 		email: currentUser?.email,
 		phone: "",
-		quantity: "",
+		quantity: 1,
 		address: "",
 	});
 
@@ -34,7 +34,7 @@ const OrderPage = () => {
 			})
 			.catch((err) => {
 				setLoading(false);
-				setError("Something went wrong. Please Try agail later.");
+				setError("Something went wrong. Please Try again later.");
 			});
 	}, [productID]);
 
@@ -46,11 +46,16 @@ const OrderPage = () => {
 		setOrderData(newOrderData);
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
+		const order = {
+			...orderData,
+			product: product.name,
+			status: false,
+		};
 		e.preventDefault();
 		setSubmitLoading(true);
 		axios
-			.post(`${baseUrl}/orders`, orderData)
+			.post(`${baseUrl}/orders`, order)
 			.then((res) => {
 				Swal.fire({
 					title: "Product ordered suffessfully",
@@ -143,7 +148,7 @@ const OrderPage = () => {
 											placeholder="Quantity"
 											required
 											onChange={handleChange}
-											value={1}
+											value={orderData.quantity}
 										/>
 									</div>
 									<div className="mb-3">
