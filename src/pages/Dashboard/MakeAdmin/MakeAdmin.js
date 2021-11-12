@@ -20,6 +20,7 @@ const MakeAdmin = () => {
 			.then((res) => {
 				if (res.data.modifiedCount > 0) {
 					window.alert("User added as admin.");
+					setEmail("");
 				}
 				setLoading(false);
 			})
@@ -37,7 +38,7 @@ const MakeAdmin = () => {
 		<>
 			<AdminBreadcrumb pageTitle="Make Admin" pagePath="Admin" />
 			<div className="dashboard-wrapper">
-				<div className="w-full md:w-6/12 mx-auto p-12">
+				<div className="w-full md:w-6/12 shadow px-6 py-3">
 					{error && (
 						<ErrorMessage text={error} resetError={resetError} />
 					)}

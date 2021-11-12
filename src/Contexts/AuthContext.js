@@ -42,7 +42,7 @@ export function AuthProvider({ children }) {
 			}
 			setLoading(false);
 		});
-	}, [currentUser?.email]);
+	}, [currentUser]);
 
 	// signup
 	async function signup(email, password, fullName) {
@@ -64,7 +64,9 @@ export function AuthProvider({ children }) {
 	// login
 	async function login(email, password) {
 		const auth = getAuth();
-		return signInWithEmailAndPassword(auth, email, password);
+		await signInWithEmailAndPassword(auth, email, password);
+		const user = auth.currentUser;
+		setCurrentUser({ ...user });
 	}
 
 	// logout

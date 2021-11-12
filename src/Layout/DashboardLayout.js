@@ -1,7 +1,10 @@
 import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
+import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
+import AddReview from "../pages/Dashboard/AddReview/AddReview";
 import DashboardHeader from "../pages/Dashboard/Header/DashboardHeader";
 import MakeAdmin from "../pages/Dashboard/MakeAdmin/MakeAdmin";
+import ManageProducts from "../pages/Dashboard/ManageProducts/ManageProducts";
 import UserOrder from "../pages/Dashboard/UserOrders.js/UserOrder";
 import PrivateRoute from "../Routes/PrivateRoute";
 
@@ -37,7 +40,7 @@ const DashboardLayout = () => {
 									<li className="">
 										<Link
 											className="sidebar-link"
-											to={`${url}`}
+											to={`${url}/add-review`}
 										>
 											Add Review
 										</Link>
@@ -56,7 +59,7 @@ const DashboardLayout = () => {
 									<li className="">
 										<Link
 											className="sidebar-link"
-											to={`${url}`}
+											to={`${url}/add-product`}
 										>
 											Add Product
 										</Link>
@@ -64,9 +67,9 @@ const DashboardLayout = () => {
 									<li className="">
 										<Link
 											className="sidebar-link"
-											to={`${url}`}
+											to={`${url}/manage-products`}
 										>
-											Manage Product
+											Manage Products
 										</Link>
 									</li>
 									<li className="">
@@ -96,6 +99,21 @@ const DashboardLayout = () => {
 							exact
 							path={`${path}/make-admin`}
 							component={MakeAdmin}
+						/>
+						<PrivateRoute
+							exact
+							path={`${path}/add-product`}
+							component={AddProduct}
+						/>
+						<PrivateRoute
+							exact
+							path={`${path}/add-review`}
+							component={AddReview}
+						/>
+						<PrivateRoute
+							exact
+							path={`${path}/manage-products`}
+							component={ManageProducts}
 						/>
 						<PrivateRoute exact path={path} component={UserOrder} />
 					</Switch>
