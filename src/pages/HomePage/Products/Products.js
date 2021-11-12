@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import SingleProduct from "../../../shared/SingleProduct/SingleProduct";
+import { baseUrl } from "../../../Utilities/Utils";
+import Loading from "../../../shared/Loading/Loading";
+import ErrorMessage from "../../../Utilities/Messages/ErrorMessage";
 
 const Products = () => {
 	const [products, setProducts] = useState([]);
@@ -10,7 +13,7 @@ const Products = () => {
 	useEffect(() => {
 		setLoading(true);
 		axios
-			.get("/data/products.json")
+			.get(`${baseUrl}/products?size=5`)
 			.then((res) => {
 				setProducts(res.data);
 				setLoading(false);
@@ -21,13 +24,24 @@ const Products = () => {
 			});
 	}, []);
 
+	const resetError = () => {
+		setError("");
+	};
+
 	return (
 		<section className="wrapper mt-32">
 			<h4 className="section-title">Latest Products</h4>
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-				{products.map((product, index) => (
-					<SingleProduct key={index} product={product} />
-				))}
+			{error && <ErrorMessage text={error} resetError={resetError} />}
+			<div className="mt-8">
+				{loading ? (
+					<Loading />
+				) : (
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+						{products.map((product, index) => (
+							<SingleProduct key={index} product={product} />
+						))}
+					</div>
+				)}
 			</div>
 		</section>
 	);
