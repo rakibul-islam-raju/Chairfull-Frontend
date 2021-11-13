@@ -21,31 +21,27 @@ export function useAuth() {
 export function AuthProvider({ children }) {
 	const [loading, setLoading] = useState(true);
 	const [currentUser, setCurrentUser] = useState();
-	const [isAdmin, setIsAdmin] = useState(false);
+	const [noUser, setNoUser] = useState();
+	const [isAdmin, setIsAdmin] = useState();
 
 	// useEFfect
 	useEffect(() => {
 		const auth = getAuth();
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			setCurrentUser(user);
-		});
 
-		return unsubscribe;
-	}, []);
-
-	// check if user is admin or not
-	useEffect(() => {
-		if (currentUser) {
-			axios.get(`${baseUrl}/users/${currentUser.email}`).then((res) => {
+			axios.get(`${baseUrl}/users/${user?.email}`).then((res) => {
 				if (res.data.admin === true) {
 					setIsAdmin(true);
 				} else {
 					setIsAdmin(false);
 				}
-				setLoading(false);
 			});
-		}
-	}, [currentUser]);
+			setLoading(false);
+		});
+
+		return unsubscribe;
+	}, []);
 
 	// signup
 	async function signup(email, password, fullName) {
