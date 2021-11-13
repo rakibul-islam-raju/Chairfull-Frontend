@@ -1,81 +1,51 @@
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../Contexts/AuthContext";
+import Nav from "./Nav";
 
 const Header = () => {
-	const { currentUser, logout } = useAuth();
+	const [showMenu, setShowMenu] = useState(false);
 
 	return (
-		<header className="shadow py-3">
-			<div className="wrapper flex flex-wrap justify-between items-center">
-				<div className="w-6/12 md:w-4/12">
+		<header className="shadow py-3 bg-white">
+			<div className="wrapper flex flex-wrap md:justify-between items-center">
+				<div className="w-4/12">
 					<Link to="/">
 						<h2 className="text-5xl text-coolGray-600 font-dancing font-semibold">
 							chair<span className="text-orange-500">full</span>
 						</h2>
 					</Link>
 				</div>
-				<div className="w-6/12 md:w-8/12">
-					<nav>
-						<ul className="flex flex-wrap space-x-4 justify-end items-center">
-							<li>
-								<Link className="nav-link" to="/">
-									Home
-								</Link>
-							</li>
-							<li>
-								<Link className="nav-link" to="/shop">
-									Shop
-								</Link>
-							</li>
-							<li>
-								<Link className="nav-link" to="/pay">
-									Pay
-								</Link>
-							</li>
-							{!currentUser ? (
-								<li>
-									<Link
-										to="/login"
-										className="btn btn-secondary  ml-2"
-									>
-										Login
-									</Link>
-								</li>
+				<div className="w-8/12">
+					<div className="flex justify-end md:hidden">
+						<button
+							className="text-orange-500"
+							onClick={() =>
+								setShowMenu((prevState) => !prevState)
+							}
+						>
+							{showMenu ? (
+								<FontAwesomeIcon icon={faTimes} size="lg" />
 							) : (
-								<>
-									<li>
-										<Link
-											className="nav-link"
-											to="/dashboard"
-										>
-											My Orders
-										</Link>
-									</li>
-									<li>
-										<Link
-											to="/dashboard"
-											className="nav-link text-orange-500 font-semibold border-b-2 border-orange-500"
-										>
-											Dashboard
-										</Link>
-									</li>
-									<li>
-										<button
-											onClick={logout}
-											type="button"
-											className="text-orange-500 shadow rounded-lg p-2  transition hover:shadow-lg"
-										>
-											<FontAwesomeIcon
-												icon={faSignOutAlt}
-											/>
-										</button>
-									</li>
-								</>
+								<FontAwesomeIcon icon={faBars} size="lg" />
 							)}
-						</ul>
-					</nav>
+						</button>
+					</div>
+					{/* wide screen menu */}
+					<div className="hidden md:flex md:justify-end">
+						<Nav />
+					</div>
+				</div>
+			</div>
+			{/* mobile screen menu */}
+			<div className="md:hidden wrapper flex justify-start">
+				<div
+					className={`overflow-hidden transition-all duration-300 transform ${
+						showMenu ? "h-56" : "h-0"
+					}`}
+				>
+					<Nav showMenu={showMenu} />
 				</div>
 			</div>
 		</header>

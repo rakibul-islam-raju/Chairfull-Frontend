@@ -10,6 +10,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "../firebase/firebase";
 import axios from "axios";
 import { baseUrl } from "../Utilities/Utils";
+import Loading from "../shared/Loading/Loading";
 
 const AuthContext = React.createContext();
 
@@ -27,7 +28,6 @@ export function AuthProvider({ children }) {
 		const auth = getAuth();
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			setCurrentUser(user);
-			setLoading(false);
 		});
 
 		return unsubscribe;
@@ -35,15 +35,16 @@ export function AuthProvider({ children }) {
 
 	// check if user is admin or not
 	useEffect(() => {
-		setLoading(true);
-		axios.get(`${baseUrl}/users/${currentUser?.email}`).then((res) => {
-			if (res.data.admin === true) {
-				setIsAdmin(true);
-			} else {
-				setIsAdmin(false);
-			}
-			setLoading(false);
-		});
+		if (currentUser) {
+			axios.get(`${baseUrl}/users/${currentUser.email}`).then((res) => {
+				if (res.data.admin === true) {
+					setIsAdmin(true);
+				} else {
+					setIsAdmin(false);
+				}
+				setLoading(false);
+			});
+		}
 	}, [currentUser]);
 
 	// signup
@@ -91,7 +92,7 @@ export function AuthProvider({ children }) {
 
 	return (
 		<AuthContext.Provider value={value}>
-			{!loading && children}
+			{loading ? <Loading /> : children}
 		</AuthContext.Provider>
 	);
 }

@@ -16,18 +16,27 @@ import {
 	faCartPlus,
 	faCog,
 	faUserShield,
+	faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const DashboardLayout = () => {
-	const { isAdmin } = useAuth();
+	const { isAdmin, logout } = useAuth();
 	let { path, url } = useRouteMatch();
+	const [showMenu, setShowMenu] = useState(false);
+
+	console.log("DBL===", isAdmin);
 
 	return (
 		<>
-			<DashboardHeader />
+			<DashboardHeader showMenu={showMenu} setShowMenu={setShowMenu} />
 			<div className="flex">
-				<div className="hidden md:block md:w-2/12">
-					<div className="bg-white h-screen border-r shadow">
+				<div
+					className={`md:block md:w-2/12 ${
+						showMenu ? "block" : "hidden"
+					}`}
+				>
+					<div className="bg-white min-h-screen border-r shadow">
 						<h4 className="text-2xl text-center bg-coolGray-200 py-3">
 							Dashboard
 						</h4>
@@ -123,6 +132,21 @@ const DashboardLayout = () => {
 									</li>
 								</>
 							)}
+							<li className="my-5">
+								<div className="flex justify-center">
+									<button
+										onClick={logout}
+										type="button"
+										className="bg-white text-orange-500 shadow rounded py-1 px-2  transition hover:shadow-lg"
+									>
+										Logout
+										<FontAwesomeIcon
+											className="ml-2"
+											icon={faSignOutAlt}
+										/>
+									</button>
+								</div>
+							</li>
 						</ul>
 					</div>
 				</div>

@@ -1,11 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { useAuth } from "../../../Contexts/AuthContext";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-const DashboardHeader = () => {
-	const { logout } = useAuth();
-
+const DashboardHeader = ({ showMenu, setShowMenu }) => {
 	return (
 		<header className="bg-orange-500 text-white py-4">
 			<div className="wrapper">
@@ -17,21 +14,19 @@ const DashboardHeader = () => {
 					</Link>
 
 					<nav>
-						<ul>
-							<li>
-								<button
-									onClick={logout}
-									type="button"
-									className="bg-white text-orange-500 shadow rounded py-1 px-2  transition hover:shadow-lg"
-								>
-									Logout
-									<FontAwesomeIcon
-										className="ml-2"
-										icon={faSignOutAlt}
-									/>
-								</button>
-							</li>
-						</ul>
+						<div className="block md:hidden">
+							<button
+								onClick={() =>
+									setShowMenu((prevState) => !prevState)
+								}
+							>
+								{showMenu ? (
+									<FontAwesomeIcon icon={faTimes} />
+								) : (
+									<FontAwesomeIcon icon={faBars} />
+								)}
+							</button>
+						</div>
 					</nav>
 				</div>
 			</div>

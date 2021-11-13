@@ -11,9 +11,9 @@ import { Link } from "react-router-dom";
 const Footer = () => {
 	return (
 		<footer className="mt-16 bg-coolGray-600 text-white py-5">
-			<div className="wrapper flex items-center">
+			<div className="wrapper flex flex-col md:flex-row items-center space-y-8 md:space-y-0">
 				<div className="w-full md:w-4/12">
-					<div className="logo">
+					<div className="flex justify-center md:justify-start">
 						<Link to="/">
 							<h4 className="text-4xl font-dancing font-semibold">
 								Chair
@@ -23,7 +23,7 @@ const Footer = () => {
 					</div>
 				</div>
 				<div className="w-full md:w-4/12">
-					<div className="flex justify-center">
+					<div className="flex justify-center md:justify-center">
 						<div className="space-x-6">
 							<Link className="hover:text-orange-500" to="/">
 								<FontAwesomeIcon icon={faFacebook} size="lg" />
@@ -44,8 +44,8 @@ const Footer = () => {
 					</div>
 				</div>
 				<div className="w-full md:w-4/12">
-					<div className="flex justify-end">
-						<div className="">
+					<div className="flex justify-center md:justify-end">
+						<div className="text-center">
 							<div className="mt-2">
 								© 2021{" "}
 								<span className="font-dm text-orange-500">
