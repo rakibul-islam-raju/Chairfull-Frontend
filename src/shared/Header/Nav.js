@@ -19,11 +19,6 @@ const Nav = () => {
 						Shop
 					</Link>
 				</li>
-				<li>
-					<Link className="nav-link" to="/pay">
-						Pay
-					</Link>
-				</li>
 				{!currentUser ? (
 					<li>
 						<Link

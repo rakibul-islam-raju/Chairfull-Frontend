@@ -2,7 +2,6 @@ import { Switch, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage/HomePage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import OrderPage from "../pages/OrderPage/OrderPage";
-import PayPage from "../pages/PayPage/PayPage";
 import RegisterPage from "../pages/ReigsterPage/RegisterPage";
 import ShopPage from "../pages/ShopPage/ShopPage";
 import PrivateRoute from "../Routes/PrivateRoute";
@@ -16,7 +15,6 @@ const MainLayout = () => {
 			<Switch>
 				<Route exact path="/" component={HomePage} />
 				<Route exact path="/shop" component={ShopPage} />
-				<Route exact path="/pay" component={PayPage} />
 				<PrivateRoute
 					exact
 					path="/order/:productID"

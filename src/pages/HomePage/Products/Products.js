@@ -13,7 +13,7 @@ const Products = () => {
 	useEffect(() => {
 		setLoading(true);
 		axios
-			.get(`${baseUrl}/products?size=5`)
+			.get(`${baseUrl}/products?size=6`)
 			.then((res) => {
 				setProducts(res.data);
 				setLoading(false);
@@ -36,7 +36,7 @@ const Products = () => {
 				{loading ? (
 					<Loading />
 				) : (
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
 						{products.map((product, index) => (
 							<SingleProduct key={index} product={product} />
 						))}
