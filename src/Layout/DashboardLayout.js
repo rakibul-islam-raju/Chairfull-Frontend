@@ -17,15 +17,15 @@ import {
 	faCog,
 	faUserShield,
 	faSignOutAlt,
+	faMoneyCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 const DashboardLayout = () => {
 	const { isAdmin, logout } = useAuth();
 	let { path, url } = useRouteMatch();
 	const [showMenu, setShowMenu] = useState(false);
-
-	console.log("DBL===", isAdmin);
 
 	return (
 		<>
@@ -65,6 +65,18 @@ const DashboardLayout = () => {
 												icon={faStar}
 											/>
 											Add Review
+										</Link>
+									</li>
+									<li className="">
+										<Link
+											className="sidebar-link"
+											to={`${url}/payment`}
+										>
+											<FontAwesomeIcon
+												className="mr-2"
+												icon={faMoneyCheck}
+											/>
+											Payment
 										</Link>
 									</li>
 								</>
@@ -171,6 +183,10 @@ const DashboardLayout = () => {
 						<PrivateRoute
 							path={`${path}/add-review`}
 							component={AddReview}
+						/>
+						<PrivateRoute
+							path={`${path}/payment`}
+							component={Payment}
 						/>
 						<PrivateRoute
 							exact

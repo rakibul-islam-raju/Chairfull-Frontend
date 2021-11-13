@@ -2,13 +2,13 @@ import { Redirect, Route } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 
 const AdminRoute = ({ component: Component, ...rest }) => {
-	const { currentUser, isAdmin } = useAuth();
+	const { isAdmin } = useAuth();
 
 	return (
 		<Route
 			{...rest}
 			render={(props) => {
-				if (!currentUser && !isAdmin) {
+				if (!isAdmin) {
 					return (
 						<Redirect
 							to={{

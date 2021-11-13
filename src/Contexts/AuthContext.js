@@ -21,7 +21,6 @@ export function useAuth() {
 export function AuthProvider({ children }) {
 	const [loading, setLoading] = useState(true);
 	const [currentUser, setCurrentUser] = useState();
-	const [noUser, setNoUser] = useState();
 	const [isAdmin, setIsAdmin] = useState();
 
 	// useEFfect
@@ -88,7 +87,11 @@ export function AuthProvider({ children }) {
 
 	return (
 		<AuthContext.Provider value={value}>
-			{loading ? <Loading /> : children}
+			{!loading && typeof isAdmin !== "undefined" ? (
+				children
+			) : (
+				<Loading />
+			)}
 		</AuthContext.Provider>
 	);
 }

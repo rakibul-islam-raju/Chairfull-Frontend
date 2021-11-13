@@ -52,7 +52,13 @@ const Reviews = () => {
 								icon={faQuoteRight}
 								size="lg"
 							/>
-							<p className="text-lg">{review.review}</p>
+							<p className="text-lg text-coolGray-500">
+								{review.review
+									.split(" ")
+									.slice(0, 20)
+									.toString()
+									.replace(/,/g, " ") + "..."}
+							</p>
 							<Rating
 								className="my-2"
 								initialRating={review.star}
